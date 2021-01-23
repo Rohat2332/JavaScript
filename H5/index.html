@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    body {
+        text-align: center;
+    }
+    div.picture-holder {
+        box-sizing: border-box;
+        width: 300px;
+        height: 450px;
+        float: left;
+        border:solid 1px black;
+    }
+
+
+    div.favoriet {
+        width: 300px;
+        height: 150px;
+    }
+
+    #pics {
+        width: 900px;
+        height: 1350px;
+        border: solid 1px black;
+        font-size: 0;
+        margin: auto;
+    }
+
+</style>
+</head>
+<body>
+<h1 style="font-family: Arial;font-weight: bold" >Bearchooser</h1>
+<h2 style="font-family: Arial">Kies hier je favoriete beer</h2>
+<div id="pics">
+
+</div>
+<script>
+    pics = document.getElementById("pics");
+    createPicsHolders();
+    createBeerImages();
+    function createPicsHolders() {
+        for (var i = 0; i < 9; i++) {
+            pictureHolder = document.createElement("div");
+            pictureHolder.className = "picture-holder";
+            pictureHolder.id = "picture-holder-" + i;
+            pics.appendChild(pictureHolder)
+        }
+    }
+
+    function createBeerImages() {
+        pictureHolders = document.getElementsByClassName("picture-holder");
+        for (var i = 0; i < pictureHolders.length; i++) {
+            favoriet = document.createElement("div");
+            favoriet.className = "favoriet";
+            favoriet.id = "favoriet_" + (i+1);
+            beerPlaatje = document.createElement("img");
+            beerPlaatje.src = "img/beer" + (i+1) + ".png";
+            beerPlaatje.id = (i+1);
+            beerPlaatje.addEventListener("click", function () {
+                maakFavoriet(this.id);
+            });
+            pictureHolders[i].appendChild(favoriet);
+            pictureHolders[i].appendChild(beerPlaatje);
+        }
+    }
+
+    function maakFavoriet(id) {
+        console.log("Maak mij favoriet het gaat om beer " + id );
+        nietzofavoriet = document.getElementsByClassName("favoriet");
+
+        for (var i = 0; i < nietzofavoriet.length; i++) {
+            nietzofavoriet[i].style.backgroundImage = "none";
+        }
+
+        favoriet = document.getElementById("favoriet_" + id);
+        favoriet.style.backgroundImage = "url('img/Hartje.png')";
+    }
+</script>
+</body>
+</html>
